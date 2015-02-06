@@ -37,3 +37,14 @@ This repository contains **Dockerfile** of [Node.js](http://nodejs.org/) w/ [Bow
 #### Run `grunt`
 
     docker run -it --rm dockerfile/nodejs-bower-grunt grunt
+
+### Volume
+
+You can mount a volume if you would like to output the results of a command back to your local disk. This is useful if you want to share the output of your commands with another container via a shared mounted volume.
+
+    // install grunt-contrib-watch to volume, then use it to watch for changes to the files specified in your Gruntfile
+    docker run -it --rm -v <local_path>:/data dockerfile/nodejs-bower-grunt npm install grunt-contrib-watch --save-dev
+    docker run -it --rm -v <local_path>:/data dockerfile/nodejs-bower-grunt grunt watch
+
+    // your custom app container that needs assets to be regenerated as you edit
+    docker run -it --rm -v <local_path>:<your_custom_mount_point> <your_custom_container> <your_run_cmd>

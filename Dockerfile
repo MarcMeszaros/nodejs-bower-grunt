@@ -13,5 +13,8 @@ RUN npm install -g bower grunt-cli
 # Define working directory.
 WORKDIR /data
 
+# Define volume mount point.
+VOLUME ["/data"]
+
 # Define default command.
 CMD ["bash"]
